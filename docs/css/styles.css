@@ -1,0 +1,1672 @@
+/* ==========================================================================
+   PSICOMENTE - Sistema de Monitoreo y Prevención de Riesgos Psiquiátricos
+   Estilos Principales del Prototipo Móvil de Alta Fidelidad
+   Basado en ERS v1.6, Arquitectura v1.1 y Rúbrica de Evaluación USM
+   ========================================================================== */
+
+:root {
+  /* Paleta Base Salud Mental */
+  --primary: #0d9488;
+  --primary-hover: #0f766e;
+  --primary-light: #ccfbf1;
+  --primary-glow: rgba(13, 148, 136, 0.25);
+  
+  --secondary: #3b82f6;
+  --secondary-light: #dbeafe;
+  
+  --bg-app: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f1f5f9;
+  
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-light: #94a3b8;
+  
+  --border-color: #e2e8f0;
+  --border-focus: #0d9488;
+  
+  /* Estados Clínicos */
+  --color-emergency: #ef4444;
+  --color-emergency-glow: rgba(239, 68, 68, 0.35);
+  --color-warning: #f59e0b;
+  --color-success: #10b981;
+  --color-info: #0ea5e9;
+  
+  /* Sombras y Elevación */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-float: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  
+  /* Bordes */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  /* Fuentes */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Transiciones */
+  --trans-fast: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --trans-bounce: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Modo Calma (Adaptación para Depresión Severa - SRS-NFU-004 y SRS-FUN-006) */
+body.mode-calm {
+  --primary: #577590;
+  --primary-hover: #435d74;
+  --primary-light: #e8ecf1;
+  --primary-glow: rgba(87, 117, 144, 0.15);
+  --bg-app: #f5f6f8;
+  --bg-card: #ffffff;
+  --bg-card-subtle: #f0f2f5;
+  --text-main: #2b3a4a;
+  --text-muted: #6c7c8c;
+  --color-emergency: #b35353;
+  --shadow-md: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Modo Protección (Adaptación para Manía / Impulsividad - SRS-NFU-003 y SRS-FUN-006) */
+body.mode-protection {
+  --primary: #d97706;
+  --primary-hover: #b45309;
+  --primary-light: #fef3c7;
+  --primary-glow: rgba(217, 119, 6, 0.25);
+  --border-focus: #d97706;
+}
+
+/* Reseteo y Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #0b1120;
+  font-family: var(--font-family);
+  color: var(--text-main);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* Barra Superior de Control Global (Evaluador / Cambiador de Roles / Modos) */
+.global-control-bar {
+  background: #1e293b;
+  color: #f8fafc;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid #334155;
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+.brand-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.brand-badge {
+  background: var(--primary);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.role-switcher {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #0f172a;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid #334155;
+}
+
+.role-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  padding: 4px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--trans-fast);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.role-btn:hover {
+  color: #f8fafc;
+}
+
+.role-btn.active {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.control-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-pill {
+  background: #334155;
+  color: #e2e8f0;
+  border: 1px solid #475569;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--trans-fast);
+}
+
+.btn-pill:hover {
+  background: #475569;
+  color: #fff;
+}
+
+.btn-pill.highlight {
+  background: #10b981;
+  border-color: #059669;
+  color: #fff;
+}
+
+.btn-pill.highlight:hover {
+  background: #059669;
+}
+
+/* Contenedor Principal de la Aplicación */
+.app-viewport {
+  min-height: calc(100vh - 49px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+  background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
+}
+
+/* Modo Marco de Smartphone */
+.device-frame {
+  width: 100%;
+  max-width: 412px;
+  height: 870px;
+  background: var(--bg-app);
+  border-radius: 48px;
+  box-shadow: 0 0 0 12px #2d3748, 0 0 0 14px #1a202c, 0 30px 60px -12px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: max-width 0.3s ease, height 0.3s ease, border-radius 0.3s ease;
+}
+
+/* Si el usuario activa pantalla completa móvil */
+body.fullscreen-mode .app-viewport {
+  padding: 0;
+  background: var(--bg-app);
+}
+
+body.fullscreen-mode .device-frame {
+  max-width: 100%;
+  height: calc(100vh - 49px);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Notch / Dynamic Island del Smartphone */
+.device-notch-bar {
+  height: 38px;
+  background: var(--bg-app);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  user-select: none;
+  z-index: 50;
+  position: relative;
+}
+
+.notch-island {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
+  width: 110px;
+  height: 24px;
+  background: #000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.camera-lens {
+  width: 9px;
+  height: 9px;
+  background: #111d2e;
+  border-radius: 50%;
+  border: 1px solid #1e293b;
+}
+
+.notch-sensor {
+  width: 5px;
+  height: 5px;
+  background: #0c1a24;
+  border-radius: 50%;
+}
+
+.device-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+/* Contenido Principal Scrolleable */
+.device-screen {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-app);
+  -webkit-overflow-scrolling: touch;
+}
+
+.device-screen::-webkit-scrollbar {
+  width: 4px;
+}
+
+.device-screen::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Indicador de barra de inicio (Home Bar de iOS/Android) */
+.device-home-bar {
+  height: 22px;
+  background: var(--bg-app);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+
+.home-indicator {
+  width: 120px;
+  height: 4px;
+  background: #94a3b8;
+  border-radius: 3px;
+}
+
+/* ==========================================================================
+   PANTALLA DE BLOQUEO POR PIN (SRS-NFU-002: Autenticidad móvil)
+   ========================================================================== */
+.pin-screen {
+  position: absolute;
+  inset: 0;
+  background: #0f172a;
+  color: #fff;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 24px 30px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.pin-screen.unlocked {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pin-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.pin-logo-icon {
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, var(--primary) 0%, #0369a1 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin: 0 auto 16px;
+  box-shadow: 0 10px 25px rgba(13, 148, 136, 0.4);
+}
+
+.pin-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.pin-header p {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.pin-dots {
+  display: flex;
+  gap: 16px;
+  margin: 25px 0 10px;
+}
+
+.pin-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #475569;
+  transition: all 0.2s ease;
+}
+
+.pin-dot.filled {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.15);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+.pin-dot.error {
+  background: var(--color-emergency);
+  border-color: var(--color-emergency);
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.pin-key {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.pin-key span.subtext {
+  font-size: 9px;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: -2px;
+  letter-spacing: 1px;
+}
+
+.pin-key:active {
+  background: var(--primary);
+  transform: scale(0.92);
+}
+
+.pin-key.ghost {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+.pin-demo-hint {
+  font-size: 11px;
+  color: #64748b;
+  text-align: center;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+}
+
+.pin-demo-hint strong {
+  color: var(--primary-light);
+}
+
+/* ==========================================================================
+   VISTAS DEL PACIENTE (BARRA INFERIOR + TABS)
+   ========================================================================== */
+.view-container {
+  display: none;
+  padding: 16px 18px 90px;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.view-container.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Barra de Navegación Inferior Móvil */
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 6px;
+  z-index: 45;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: var(--trans-fast);
+  flex: 1;
+}
+
+.nav-item .nav-icon {
+  font-size: 20px;
+  transition: transform 0.2s ease;
+}
+
+.nav-item:hover {
+  color: var(--primary);
+}
+
+.nav-item.active {
+  color: var(--primary);
+}
+
+.nav-item.active .nav-icon {
+  transform: translateY(-2px) scale(1.1);
+}
+
+/* Botón de Pánico Rápido Flotante */
+.panic-fab {
+  position: absolute;
+  bottom: 80px;
+  right: 18px;
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px var(--color-emergency-glow);
+  cursor: pointer;
+  z-index: 42;
+  transition: var(--trans-bounce);
+  animation: pulseButton 2.5s infinite;
+}
+
+.panic-fab:active {
+  transform: scale(0.92);
+}
+
+@keyframes pulseButton {
+  0%, 100% { box-shadow: 0 8px 20px var(--color-emergency-glow); }
+  50% { box-shadow: 0 0 28px rgba(239, 68, 68, 0.7); }
+}
+
+/* Cabecera del Paciente */
+.patient-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patient-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.patient-name-block h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.patient-diag-pill {
+  font-size: 11px;
+  background: var(--primary-light);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.header-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* Tarjetas Generales */
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition: var(--trans-fast);
+}
+
+.card:hover {
+  border-color: #cbd5e1;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.card-title .tag-rf {
+  font-size: 10px;
+  font-weight: 700;
+  background: #e0e7ff;
+  color: #4338ca;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Banner de Racha y Gamificación (SRS-FUN-018) */
+.streak-banner {
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.streak-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-flame {
+  font-size: 30px;
+  animation: bounceFlame 2s infinite ease-in-out;
+}
+
+@keyframes bounceFlame {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15) rotate(5deg); }
+}
+
+.streak-text h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #92400e;
+}
+
+.streak-text p {
+  font-size: 11px;
+  color: #b45309;
+}
+
+.streak-badge {
+  background: #d97706;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* Tarjeta de Resumen Rápido */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.metric-mini-card {
+  background: var(--bg-card-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metric-mini-card .label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.metric-mini-card .val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.metric-mini-card .sub {
+  font-size: 10px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   BOTÓN DE PÁNICO - MÓDULO DE 6 SEGUNDOS (SRS-FUN-001, CU-01)
+   ========================================================================== */
+.panic-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  min-height: 520px;
+  gap: 20px;
+}
+
+.panic-instructions h2 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-emergency);
+  margin-bottom: 6px;
+}
+
+.panic-instructions p {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 290px;
+  line-height: 1.4;
+}
+
+/* Contenedor del Botón Interactivo con Anillo SVG */
+.panic-button-wrapper {
+  position: relative;
+  width: 230px;
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  touch-action: none;
+  cursor: pointer;
+}
+
+.panic-svg-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.panic-ring-bg {
+  fill: none;
+  stroke: #fee2e2;
+  stroke-width: 10;
+}
+
+.panic-ring-progress {
+  fill: none;
+  stroke: #ef4444;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-dasharray: 660;
+  stroke-dashoffset: 660;
+  transition: stroke-dashoffset 0.05s linear;
+}
+
+.panic-core-button {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle at 35% 35%, #ff4d4d, #b91c1c);
+  border-radius: 50%;
+  box-shadow: 0 12px 30px rgba(239, 68, 68, 0.4), inset 0 2px 6px rgba(255,255,255,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  z-index: 2;
+  padding: 10px;
+}
+
+.panic-core-button:active, .panic-button-wrapper.holding .panic-core-button {
+  transform: scale(0.93);
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.6), inset 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.panic-icon-sos {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.panic-text-label {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.panic-timer-display {
+  font-size: 26px;
+  font-weight: 900;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.panic-status-feedback {
+  font-size: 12px;
+  color: var(--text-muted);
+  min-height: 20px;
+  font-weight: 600;
+}
+
+.panic-status-feedback.error {
+  color: var(--color-emergency);
+  animation: shake 0.3s;
+}
+
+.panic-contacts-preview {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  width: 100%;
+  text-align: left;
+  font-size: 11px;
+}
+
+.panic-contacts-preview h4 {
+  color: #991b1b;
+  font-size: 11px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Modal de Código Rojo Activado (Alerta Vital SRS-FUN-001) */
+.emergency-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.emergency-modal.active {
+  display: flex;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.emergency-modal-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 380px;
+  border: 3px solid var(--color-emergency);
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(239, 68, 68, 0.5);
+}
+
+.emergency-modal-header {
+  background: var(--color-emergency);
+  color: white;
+  padding: 16px 20px;
+  text-align: center;
+}
+
+.emergency-modal-header h2 {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.emergency-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.emergency-step-box {
+  background: #f8fafc;
+  border-left: 4px solid var(--color-emergency);
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.emergency-step-box strong {
+  color: var(--text-main);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.btn-emergency-call {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-emergency-cancel {
+  background: #f1f5f9;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   REGISTRO DIARIO (SUEÑO & ÁNIMO - CU-02, SRS-FUN-003, SRS-FUN-004)
+   ========================================================================== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  outline: none;
+}
+
+.custom-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: 3px solid white;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.1s ease;
+}
+
+.custom-range::-webkit-slider-thumb:active {
+  transform: scale(1.2);
+}
+
+.range-scale-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Selector de Calidad de Sueño (Estrellas / Emojis) */
+.star-rating-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--bg-card-subtle);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  filter: grayscale(1);
+  opacity: 0.5;
+  transition: var(--trans-bounce);
+}
+
+.star-btn.selected {
+  filter: grayscale(0);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Selector de Valencia Afectiva */
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.mood-btn {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: var(--trans-fast);
+}
+
+.mood-btn .mood-emoji {
+  font-size: 24px;
+}
+
+.mood-btn .mood-name {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.mood-btn:hover {
+  background: #e2e8f0;
+}
+
+.mood-btn.selected {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.mood-btn.selected .mood-name {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* Bitácora de Texto Libre (SRS-FUN-011) */
+.journal-input {
+  width: 100%;
+  height: 80px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 13px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.journal-input:focus {
+  border-color: var(--border-focus);
+}
+
+.tags-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag-btn {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  font-size: 11px;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.tag-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+/* ==========================================================================
+   ADHERENCIA FARMACOLÓGICA (CU-04, SRS-FUN-002, SRS-FUN-007)
+   ========================================================================== */
+.med-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: var(--trans-fast);
+}
+
+.med-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.med-title h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.med-title p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.med-schedule-badge {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.med-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-med-take {
+  flex: 1;
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #a7f3d0;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--trans-fast);
+}
+
+.btn-med-take:hover, .btn-med-take.taken {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+.btn-med-skip {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-med-skip:hover, .btn-med-skip.skipped {
+  background: #ef4444;
+  color: white;
+}
+
+/* Barra de progreso de adherencia */
+.adherence-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.adherence-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  width: 92%;
+  transition: width 0.5s ease;
+}
+
+/* ==========================================================================
+   CUESTIONARIOS PROMS (SRS-FUN-005: PHQ-9)
+   ========================================================================== */
+.prom-question-card {
+  background: var(--bg-card-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prom-question-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.prom-options {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.prom-opt-btn {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xs);
+  padding: 6px 2px;
+  font-size: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--trans-fast);
+}
+
+.prom-opt-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  font-weight: 700;
+}
+
+.prom-score-badge {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==========================================================================
+   PANEL PSIQUIATRA / REPORTES ANALÍTICOS (CU-03, SRS-FUN-009)
+   ========================================================================== */
+.clinician-view {
+  background: #f8fafc;
+  color: #0f172a;
+  min-height: 100%;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.clinician-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+}
+
+.clinician-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doctor-badge {
+  font-size: 11px;
+  background: #dbeafe;
+  color: #1e40af;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+}
+
+/* Tarjeta de Alerta de Viraje Maníaco (SRS-FUN-012) */
+.alert-manic-shift {
+  background: #fff7ed;
+  border: 1px solid #fdba74;
+  border-left: 5px solid #f97316;
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.alert-manic-shift .icon {
+  font-size: 24px;
+}
+
+.alert-manic-shift h4 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #9a3412;
+}
+
+.alert-manic-shift p {
+  font-size: 11px;
+  color: #7c2d12;
+  margin-top: 2px;
+}
+
+/* Gráfico Interactivo SVG */
+.chart-box {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chart-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chart-chip {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.chart-chip.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.svg-chart-container {
+  width: 100%;
+  height: 180px;
+  position: relative;
+}
+
+.svg-chart-container svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ==========================================================================
+   VISTA RED DE APOYO / SMS (CU-01 receptor)
+   ========================================================================== */
+.support-view {
+  background: #0f172a;
+  color: white;
+  min-height: 100%;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sms-simulation-box {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sms-sender {
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sms-bubble {
+  background: #ef4444;
+  color: white;
+  padding: 12px 14px;
+  border-radius: 16px 16px 16px 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.map-simulation-card {
+  background: #1e293b;
+  border-radius: var(--radius-md);
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(#334155 1px, transparent 1px),
+    linear-gradient(90deg, #334155 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.4;
+}
+
+.map-pin {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: pulsePin 1.5s infinite;
+}
+
+@keyframes pulsePin {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.map-pin-icon {
+  font-size: 32px;
+}
+
+.map-pin-label {
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   MODAL DE INSPECCIÓN DE RÚBRICA Y AUDITORÍA (100% COMPLIANCE)
+   ========================================================================== */
+.modal-rubric {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-rubric.active {
+  display: flex;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-rubric-dialog {
+  background: white;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-float);
+}
+
+.modal-rubric-header {
+  background: #1e293b;
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-rubric-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.btn-close-modal:hover {
+  color: white;
+}
+
+.modal-rubric-body {
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 13px;
+}
+
+.rubric-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.rubric-table th, .rubric-table td {
+  border: 1px solid var(--border-color);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.rubric-table th {
+  background: #f8fafc;
+  font-weight: 700;
+  color: #334155;
+}
+
+.score-tag {
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  display: inline-block;
+}
+
+.audit-log-terminal {
+  background: #0f172a;
+  color: #38bdf8;
+  font-family: monospace;
+  font-size: 11px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  max-height: 160px;
+  overflow-y: auto;
+  line-height: 1.5;
+}
+
+/* Utilidades Comunes */
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--trans-fast);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--bg-card-subtle);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Animaciones y Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
