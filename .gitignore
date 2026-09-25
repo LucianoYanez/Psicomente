@@ -1,0 +1,31 @@
+# Entornos virtuales y dependencias
+node_modules/
+dist/
+build/
+venv/
+.env
+.env.local
+.env.*.local
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# IDEs y Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos temporales
+tmp/
+temp/
