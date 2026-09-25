@@ -64,7 +64,7 @@ Psicomente/
 
 ### Clonar el repositorio
 ```bash
-git clone https://github.com/<TU_USUARIO>/Psicomente.git
+git clone https://github.com/LucianoYanez/Psicomente.git
 cd Psicomente
 ```
 
